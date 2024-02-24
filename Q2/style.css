@@ -56,6 +56,9 @@ body{
     justify-self: flex-end;
     display: none;
 }
+#cat-extend-img{
+    display: none;
+}
 #navbar nav{
     flex: 1;
     display: flex;
@@ -153,4 +156,128 @@ body{
 
 .right-banner img{
     width: 90%;
+}
+
+@media screen and (max-width: 800px){
+    #navbar{
+        width:100%;
+        padding: 0%;
+        display: flex;
+        /* height: 50px; for closed 450px for open*/
+        /* height: 50px;   */
+        flex-direction: column;
+        overflow: hidden;
+        transition: 0.5s;
+    }
+    #extend-img{
+        justify-self: flex-end;
+        display: block;
+        width: 35px;
+        position: absolute;
+        left: 84%;
+        bottom: 95%;
+    }
+    #logo-img{
+        width: 225px;
+        margin-top: 10px;
+        padding-left: 10px;
+    }
+    #navbar ul li{
+        display: block;
+        margin-top: 15px;
+        width: 100%;
+        text-align: center;
+    }
+    #navbar-nav ul li a{
+        font-size: 20px;
+    }
+    #navbar nav{
+        align-items: center;
+        justify-content: center;
+    }
+    #navbar ul:nth-child(2){
+        padding-left: 0%;
+    }
+    #category-nav ul{
+        display: flex;
+        flex-direction: column;
+    } 
+    #category-nav ul li{
+        display: block;
+        margin-top: 15px;
+        width: 100%;
+        text-align: center;
+        border-top: 1px solid rgb(219, 219, 219);
+    }
+    
+    #category-nav ul li a{
+        font-size: 20px;
+    }
+    #category-nav{
+        display: flex;
+        /* height: 50px; for closed 450px for open*/
+        /* height: 50px;   */
+        flex-direction: column;
+        overflow: hidden;
+        transition: 0.5s;
+    }
+    #cat-extend-img{
+        display: block;
+        align-self: center;
+        margin-top: 15px;
+        margin-bottom: 10px;
+
+    }
+    
+    #content{
+        display: flex;
+        flex-direction: column-reverse;
+    }
+    .left-banner{
+        width: 100%;
+        height: 60%;
+        display: flex;
+        flex-direction: column;        
+        align-items: center;
+        padding-left: 0;
+    }
+    .right-banner{
+        display: flex;
+        width: 96%;
+        height: 60%;
+        padding: 2%;
+        justify-content: center;
+    }
+    .right-banner img{
+        align-self: center;
+    }
+    .left-banner h1{
+        font-size: 40px;
+        text-align: center;
+    }
+    
+    .left-banner p{
+        font-size: 18px;
+        text-align: center;
+    }
+    .left-banner input{
+        height: 55px;
+        width: 305px;
+    }
+    .left-banner input::placeholder{
+        padding-left: 10px;
+        font-size: 10px;
+        color: gray;
+    }
+    .left-banner button{
+        width: 30%;
+        height: 55px;
+    }
+    .left-banner img{
+        height: 35px
+    }
+    .search-box{
+        justify-content: center;
+    }
+    
 }

@@ -9,7 +9,8 @@
 <body>
     <div id="main-container">
         <div id="navbar">
-            <img src="logo.png">
+            <img id="logo-img" src="logo.png">
+            <img id="extend-img" src="navextend.png" onclick="ExtendNav()">
             <nav>
                 <ul>
                     <li><a class="normal-anchor" href="#">LOG IN</a></li>
@@ -21,9 +22,9 @@
                     <li><a class="normal-anchor" href="#">HOW IT WORKS</a></li>
                 </ul>
             </nav>
-            <img id="extend-img" src="navextend.png">
         </div>
         <div id="category-nav">
+            <img id="cat-extend-img" src="navextend.png" onclick="ExtendCategories()">
             <nav>
                 <ul>
                     <li><a href="#">Technology & Programming</a></li>
@@ -33,7 +34,7 @@
                     <li><a href="#">Business</a></li>
                     <li><a href="#">Music & Audio</a></li>
                     <li><a href="#">Social Media</a></li>
-                    <li><a href="#">DVideo, Photo & Image</a></li>
+                    <li><a href="#">Video, Photo & Image</a></li>
                 </ul>
             </nav>
         </div>
@@ -53,3 +54,27 @@
     </div>
 </body>
 </html>
+<script>
+    
+    var cat_nav = document.getElementById('category-nav')
+    cat_nav.style.maxHeight = "50px"
+    function ExtendCategories(){
+        if (cat_nav.style.maxHeight == '50px'){
+            cat_nav.style.maxHeight = "450px"
+        }
+        else{
+            cat_nav.style.maxHeight = "50px"
+        }
+    }
+
+    var nav = document.getElementById('navbar')
+    nav.style.maxHeight = "55px"
+    function ExtendNav(){
+        if (nav.style.maxHeight == '55px'){
+            nav.style.maxHeight = "190px"
+        }
+        else{
+            nav.style.maxHeight = "55px"
+        }
+    }
+</script>
