@@ -4,24 +4,17 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Job Application Form</title>
-  <!-- <link rel="stylesheet" href="bootstrap.min.css"> -->
   <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-  <!-- Latest compiled and minified CSS -->
 </head>
 <body>
 <div id="formDataDisplay">
     <br>
     <button class="btn btn-primary" onclick="goBack()">Go Back</button>
-  <h3>Form Data</h3>
-  <table class="table">
-    <thead>
-      <tr>
-        <th>Field</th>
-        <th>Value</th>
-      </tr>
-    </thead>
+  <br>
+    <h3>Applications Data</h3>
+  <br>
+  <table id="myTable" class="table table-hover" style="text-align: center;">
     <tbody>
-      <!-- Data rows will be dynamically added here -->
     </tbody>
   </table>
 </div>
@@ -97,7 +90,7 @@
         <div class="form-group">
           <label for="schoolName">Name of School/University</label>
           <input type="text" class="form-control" id="schoolName">
-          <label id="schoolNamenvalid" class="invalid-feedback" style="display: none;">Cannot be empty</label>
+          <label id="schoolNameInvalid" class="invalid-feedback" style="display: none;">Cannot be empty</label>
         </div>
         <div class="form-row">
           <div class="form-group col-md-6">
@@ -212,7 +205,203 @@
 </html>
 <script>
     debugger;
+    var idToLabel = {
+        "firstName" : "First Name",
+        "lastName" : "Last Name",
+        "contactInfo" : "Contact Number",
+        "email" : "Email",
+        "street" : "Street",
+        "city" : "City",
+        "state" : "State",
+        "zip" : "ZIP Code",
+        "resume" : "Resume",
+        "coverLetter" : "Cover Letter",
+        "educationLevel" : "Highest Level of Education Attained",
+        "schoolName" : "Name of Shcool/University",
+        "major" : "FMajor/Area of Study",
+        "gradYear" : "Graduation Year",
+        "jobTitle" : "Previous Job Titles",
+        "companyNames" : "Company Names",
+        "employmentDates" : "Employment Dates",
+        "jobResponsibilities" : "Job Responsibilities",
+        "relevantSkills" : "Relevant Skills",
+        "certifications" : "Certifications",
+        "startDate" : "Start Date",
+        "workSchedule" : "Preferred Work Schedule",
+        "relocate" : "Willingness to Relocate",
+        "referenceName" : "Reference Name",
+        "referenceContact" : "Reference Contact",
+        "relationship" : "Relationship to Applicant",
+        "whyWorkHere" : "Why work for this company",
+        "termsAgree" : "Agree Terms and Conditions",
+        "privacyPolicyAck" : "Acknowledge Privacy Policy",
+    }
     var tblDiv = document.getElementById('formDataDisplay')
     tblDiv.style.display = 'none';
+    var formDiv = document.getElementById('formContainer')
 
+    var applications = []
+    function markInvalid(key){
+        if (!document.getElementById(key).classList.contains('is-invalid')){
+            document.getElementById(key).classList.add('is-invalid')
+        }
+    }
+    function performValidation(data){
+        debugger;
+        let rValue = true;
+        for (let key in data){
+            if (data[key] == "" || data[key] == false){
+                if (!!document.getElementById(key + 'Invalid')){
+                    document.getElementById(key + 'Invalid').style = 'block'
+                    markInvalid(key)
+                    rValue = false
+                }
+            }
+            else{
+                if (key == "firstName" || key == "lastName"){
+                    if(/^[a-zA-Z\s]+$/.test(data[key]) == false){
+                        if (!!document.getElementById(key + 'Invalid')){
+                            document.getElementById(key + 'Invalid').style = 'block'
+                            markInvalid(key)
+                            rValue = false
+                        }
+                    }
+                    else{
+                        if (!!document.getElementById(key + 'Invalid')){
+                        document.getElementById(key + 'Invalid').style = 'none'
+                        document.getElementById(key).classList.remove('is-invalid')
+                    }
+                    }
+                }
+                else if (key == "contactInfo"){
+                    if(/^03\d{9}$/.test(data[key]) == false){
+                        if (!!document.getElementById(key + 'Invalid')){
+                            document.getElementById(key + 'Invalid').style = 'block'
+                            markInvalid(key)
+                            rValue = false
+                        }
+                    }
+                    else{
+                        if (!!document.getElementById(key + 'Invalid')){
+                        document.getElementById(key + 'Invalid').style = 'none'
+                        document.getElementById(key).classList.remove('is-invalid')
+                    }
+                    }
+                }
+                else if (key == "email"){
+                    if(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(data[key]) == false){
+                        if (!!document.getElementById(key + 'Invalid')){
+                            document.getElementById(key + 'Invalid').style = 'block'
+                            markInvalid(key)
+                            rValue = false
+                        }
+                    }
+                    else{
+                        if (!!document.getElementById(key + 'Invalid')){
+                        document.getElementById(key + 'Invalid').style = 'none'
+                        document.getElementById(key).classList.remove('is-invalid')
+                    }
+                    }
+                }
+                else if (key == "privacyPolicyAck" || key == "termsAgree"){
+                    if(!data[key]){
+                        if (!!document.getElementById(key + 'Invalid')){
+                            document.getElementById(key + 'Invalid').style = 'block'
+                            markInvalid(key)
+                            
+                            rValue = false
+                        }
+                        
+                    }
+                    else{
+                        if (!!document.getElementById(key + 'Invalid')){
+                        document.getElementById(key + 'Invalid').style = 'none'
+                        document.getElementById(key).classList.remove('is-invalid')
+                    }
+                    }
+                }
+                else{
+                    if (!!document.getElementById(key + 'Invalid')){
+                        document.getElementById(key + 'Invalid').style = 'none'
+                        document.getElementById(key).classList.remove('is-invalid')
+                    }
+                }
+            }
+        }
+        return rValue
+    }
+
+    let myform = document.getElementById('myForm')
+    myform.addEventListener('submit', function(e){
+        debugger
+        e.preventDefault()
+        const form = e.target;
+        const data = {};
+        for (let i=0; i < form.elements.length; i++) {
+            const elem = form.elements[i];
+            if (elem.id != ""){
+                if (elem.id == "resume"){
+                    data[elem.id] = elem.files[0].name;
+                }
+                else{
+                    data[elem.id] = elem.value
+                }
+            }
+        }
+
+        data['termsAgree'] = document.getElementById('termsAgree').checked
+        data['privacyPolicyAck'] = document.getElementById('privacyPolicyAck').checked
+        
+        if (performValidation(data)){
+            applications.push(data)
+            populateTable()
+            formDiv.style.display = 'none';
+            tblDiv.style.display = 'block';
+        }
+    });
+
+    function populateTable(){
+        debugger;
+        var table = document.getElementById("myTable");
+        var tbody = table.getElementsByTagName("tbody")[0];
+        tbody.innerHTML = ""; 
+
+        for (let i = 0; i < applications.length; i++){
+            var row = document.createElement("tr");
+            var fieldCell = document.createElement("td");
+            fieldCell.colSpan = 2
+            fieldCell.textContent = "Application " + (i+1).toString();
+            fieldCell.style.fontSize = "24px"
+            fieldCell.style.fontWeight = "500px"
+            fieldCell.style.color = "white"
+            fieldCell.style.backgroundColor = "black"
+            row.appendChild(fieldCell);
+            tbody.appendChild(row);
+
+            let data = applications[i]
+            for (let key in data){
+                if (data[key] != ""){
+                    addRowToTable(tbody, idToLabel[key], data[key]);
+                }
+            }
+
+        }
+    }
+
+    function goBack(){
+
+        formDiv.style.display = 'block';
+        tblDiv.style.display = 'none';
+    }
+
+  function addRowToTable(tableBody, field, value) {
+    var row = document.createElement("tr");
+    var fieldCell = document.createElement("td");
+    fieldCell.textContent = field;
+    var valueCell = document.createElement("td");
+    valueCell.textContent = value;
+    row.appendChild(fieldCell);
+    row.appendChild(valueCell);
+    tableBody.appendChild(row);
+  }
 </script> 
