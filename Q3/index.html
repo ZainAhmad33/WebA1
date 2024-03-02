@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Job Application Form</title>
+  <!-- <link rel="stylesheet" href="bootstrap.min.css"> -->
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Latest compiled and minified CSS -->
+</head>
+<body>
+<div id="formDataDisplay">
+    <br>
+    <button class="btn btn-primary" onclick="goBack()">Go Back</button>
+  <h3>Form Data</h3>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Field</th>
+        <th>Value</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Data rows will be dynamically added here -->
+    </tbody>
+  </table>
+</div>
+  <div class="container" id="formContainer">
+    <br>
+    <h2>Job Application Form</h2>
+    <form id="myForm">
+      <fieldset>
+        <legend>Personal Information:</legend>
+        <div class="form-group">
+            <label for="firstName">Name</label>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <input type="text" class="form-control" id="firstName" placeholder="First Name">
+                    <label id="firstNameInvalid" class="invalid-feedback" style="display: none;">Cannot be empty or contain special characters and numbers</label>
+                </div>
+                <div class="form-group col-md-6">
+                    <input type="text" class="form-control" id="lastName" placeholder="Last Name">
+                    <label id="lastNameInvalid" class="invalid-feedback" style="display: none;">Cannot be empty or contain special characters and numbers</label>
+                </div>
+            </div>
+            <label for="contactInfo">Contact Information</label>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <input type="tel" class="form-control" id="contactInfo" placeholder="Phone Number">
+                    <label id="contactInfoInvalid" class="invalid-feedback" style="display: none;">Cannot be empty and Follow correct format: 03XXXXXXXXX</label>
+                </div>
+                <div class="form-group col-md-6">
+                    <input type="email" class="form-control" id="email" placeholder="Email Address">
+                    <label id="emailInvalid" class="invalid-feedback" style="display: none;">Incorrect email format or empty</label>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+          <label for="street">Address</label>
+          <input type="text" class="form-control" id="street" placeholder="Street">
+          <label id="streetInvalid" class="invalid-feedback" style="display: none;">Cannot be empty</label>
+          <input type="text" class="form-control mt-2" id="city" placeholder="City">
+          <label id="cityInvalid" class="invalid-feedback" style="display: none;">Cannot be empty</label>
+          <br>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <input type="text" class="form-control" id="state" placeholder="State">
+              <label id="stateInvalid" class="invalid-feedback" style="display: none;">Cannot be empty</label>
+            </div>
+            <div class="form-group col-md-6">
+              <input type="text" class="form-control" id="zip" placeholder="ZIP Code">
+            </div>
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Resume and Cover Letter:</legend>
+        <div class="form-group">
+          <label for="resume" class="form-label mt-4">Upload Resume</label>
+          <input type="file" class="form-control-file" id="resume">
+          <label id="resumeInvalid" class="invalid-feedback" style="display: none;">No resume selected</label>
+        </div>
+        <div class="form-group">
+          <label for="coverLetter">Cover Letter</label>
+          <textarea class="form-control" id="coverLetter" rows="4"></textarea>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Education:</legend>
+        <div class="form-group">
+          <label for="educationLevel">Highest Level of Education Attained</label>
+          <input type="text" class="form-control" id="educationLevel">
+          <label id="educationLevelInvalid" class="invalid-feedback" style="display: none;">Cannot be empty</label>
+        </div>
+        <div class="form-group">
+          <label for="schoolName">Name of School/University</label>
+          <input type="text" class="form-control" id="schoolName">
+          <label id="schoolNamenvalid" class="invalid-feedback" style="display: none;">Cannot be empty</label>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="major">Major/Area of Study</label>
+            <input type="text" class="form-control" id="major">
+            <label id="majorInvalid" class="invalid-feedback" style="display: none;">Cannot be empty</label>
+          </div>
+          <div class="form-group col-md-6">
+            <label for="gradYear">Graduation Year</label>
+            <input type="month" class="form-control" id="gradYear">
+            <label id="gradYearInvalid" class="invalid-feedback" style="display: none;">Cannot be empty</label>
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Employment History:</legend>
+        <div class="form-group">
+          <label for="jobTitles">Previous Job Titles</label>
+          <input type="text" class="form-control" id="jobTitles">
+        </div>
+        <div class="form-group">
+          <label for="companyNames">Company Names</label>
+          <input type="text" class="form-control" id="companyNames">
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="employmentDates">Employment Dates</label>
+            <input type="text" class="form-control" id="employmentDates">
+          </div>
+          <div class="form-group col-md-6">
+            <label for="jobResponsibilities">Job Responsibilities</label>
+            <textarea class="form-control" id="jobResponsibilities" rows="4"></textarea>
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Skills:</legend>
+        <div class="form-group">
+          <label for="relevantSkills">Relevant Skills</label>
+          <input type="text" class="form-control" id="relevantSkills">
+        </div>
+        <div class="form-group">
+          <label for="certifications">Certifications</label>
+          <input type="text" class="form-control" id="certifications">
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Availability:</legend>
+        <div class="form-group">
+          <label for="startDate">Start Date</label>
+          <input type="date" class="form-control" id="startDate">
+          <label id="startDateInvalid" class="invalid-feedback" style="display: none;">Cannot be empty</label>
+        </div>
+        <div class="form-group">
+          <label for="workSchedule">Preferred Work Schedule</label>
+          <input type="text" class="form-control" id="workSchedule">
+        </div>
+        <div class="form-group">
+          <label for="relocate">Willingness to Relocate</label>
+          <select class="form-control" id="relocate">
+            <option>Yes</option>
+            <option>No</option>
+          </select>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>References:</legend>
+        <div class="form-group">
+          <label for="referenceName">Reference Name</label>
+          <input type="text" class="form-control" id="referenceName">
+        </div>
+        <div class="form-group">
+          <label for="referenceContact">Reference Contact Information</label>
+          <input type="tel" class="form-control" id="referenceContact">
+        </div>
+        <div class="form-group">
+          <label for="relationship">Relationship to Applicant</label>
+          <input type="text" class="form-control" id="relationship">
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Additional Questions:</legend>
+        <div class="form-group">
+          <label for="whyWorkHere">Why do you want to work for this company?</label>
+          <textarea class="form-control" id="whyWorkHere" rows="4"></textarea>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Consent and Agreement:</legend>
+        <div class="form-group form-check">
+          <input type="checkbox" class="form-check-input" id="termsAgree">
+          <label class="form-check-label" for="termsAgree">I agree to the terms and conditions</label>
+          <label id="termsAgreeInvalid" class="invalid-feedback" style="display: none;">Cannot be unchecked</label>
+        </div>
+        <div class="form-group form-check">
+          <input type="checkbox" class="form-check-input" id="privacyPolicyAck">
+          <label class="form-check-label" for="privacyPolicyAck">I acknowledge the Privacy Policy</label>
+          <label id="privacyPolicyAckInvalid" class="invalid-feedback" style="display: none;">Cannot be unchecked</label>
+        </div>
+      </fieldset>
+
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  </div>
+</body>
+</html>
+<script>
+    debugger;
+    var tblDiv = document.getElementById('formDataDisplay')
+    tblDiv.style.display = 'none';
+
+</script> 
